@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-gradient-from: 249 250 251;
+    --bg-gradient-to: 243 244 246;
+    --foreground: 31 41 55;
+    
+    --card-bg: 255 255 255;
+    --card-border: 229 231 235;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    
+    --input-bg: 255 255 255;
+    --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+
+  .dark {
+    --bg-gradient-from: 15 23 42;
+    --bg-gradient-to: 2 6 23;
+    --foreground: 226 232 240;
+    
+    --card-bg: 30 41 59;
+    --card-border: 255 255 255;
+    --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+    
+    --input-bg: 15 23 42;
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  }
+
+  body {
+    background-image: linear-gradient(to bottom right, rgb(var(--bg-gradient-from)), rgb(var(--bg-gradient-to)));
+    color: rgb(var(--foreground));
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.glass-card {
+  @apply bg-white/70 dark:bg-slate-800/60 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 shadow-lg rounded-2xl;
 }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
