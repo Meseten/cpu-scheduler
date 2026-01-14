@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OS Scheduler",
-  description: "Algorithm Visualizer for COSC80",
+  title: "OS Scheduler Ultima",
+  description: "Secure, Advanced Algorithmic Visualization",
 };
 
 export default function RootLayout({
