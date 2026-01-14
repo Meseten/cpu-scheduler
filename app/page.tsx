@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { 
   Play, Plus, Trash2, BarChart2, RefreshCw, Cpu, Clock, Activity, 
-  Settings, Sun, Moon, Monitor, Info, Shuffle, CheckCircle2, 
-  AlertCircle, BookOpen, Trophy, XCircle, ArrowRight, ShieldCheck, Terminal
+  Settings, Info, Shuffle, CheckCircle2, 
+  AlertCircle, BookOpen, Trophy, XCircle, ShieldCheck, Terminal
 } from "lucide-react";
 import { ALGORITHMS, AlgorithmType, solve, SchedulerOutput } from "./utils/scheduler";
 import { clsx } from "clsx";
@@ -163,7 +163,6 @@ export default function OSProject() {
   const [output, setOutput] = useState<SchedulerOutput | null>(null);
   const [view, setView] = useState<'simulate' | 'compare'>('simulate');
   const [comparisonData, setComparisonData] = useState<ComparisonResult[] | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
   const [error, setError] = useState<string | null>(null);
 
   const logContainerRef = useRef<HTMLDivElement>(null);
@@ -272,18 +271,8 @@ export default function OSProject() {
   }, [handleRun]);
 
   useEffect(() => {
-    const root = document.documentElement;
-    const applyTheme = (t: 'light' | 'dark' | 'system') => {
-        const isDark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDark) root.classList.add('dark');
-        else root.classList.remove('dark');
-    };
-    applyTheme(theme);
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => { if (theme === 'system') applyTheme('system'); };
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
+    document.documentElement.classList.add('dark');
+  }, []);
 
   const showPriority = selectedAlgo.includes("Priority") || selectedAlgo.includes("Multilevel");
   const analysis = comparisonData ? getComparisonAnalysis(comparisonData[0], comparisonData[comparisonData.length - 1]) : null;
@@ -310,20 +299,6 @@ export default function OSProject() {
           </div>
           
           <div className="flex flex-wrap gap-4 items-center justify-center xl:justify-end w-full xl:w-auto">
-            <div className="flex bg-white/80 dark:bg-slate-800/50 p-1.5 rounded-xl border border-gray-200 dark:border-white/5 backdrop-blur-md shadow-sm">
-                {(['light', 'system', 'dark'] as const).map((t) => (
-                    <button 
-                        key={t}
-                        onClick={() => setTheme(t)} 
-                        className={clsx(
-                            "p-3 rounded-lg transition-all duration-300",
-                            theme === t ? "bg-blue-50 dark:bg-slate-700 shadow-inner text-blue-600 dark:text-blue-400 scale-105" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-                        )}
-                    >
-                        {t === 'light' ? <Sun size={20}/> : t === 'dark' ? <Moon size={20}/> : <Monitor size={20}/>}
-                    </button>
-                ))}
-            </div>
 
             <button onClick={() => setView('simulate')} className={clsx("flex-1 xl:flex-none justify-center px-8 py-3.5 rounded-xl font-bold text-lg transition-all flex items-center gap-2 shadow-lg active:scale-95", view === 'simulate' ? "bg-blue-600 text-white shadow-blue-500/30 hover:bg-blue-700" : "bg-white dark:bg-slate-800/50 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-slate-700/80 backdrop-blur-md")}>
                 <Play size={20} /> Simulate
