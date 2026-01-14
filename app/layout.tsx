@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OS Scheduler Ultima",
-  description: "Secure, Advanced Algorithmic Visualization",
+  title: "OS Scheduler Visualizer",
+  description: "COSC80 - Operating Systems",
 };
 
 export default function RootLayout({
