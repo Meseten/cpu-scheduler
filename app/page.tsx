@@ -300,11 +300,11 @@ export default function OSProject() {
             </div>
             <div>
               <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                Scheduler <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Ultima</span>
+                OS Scheduler <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Visualizer</span>
               </h1>
               <div className="flex items-center gap-2 mt-1">
                  <ShieldCheck size={14} className="text-emerald-500"/>
-                 <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium">Secure Algorithmic Simulator</p>
+                 <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium">COSC80 - Operating Systems</p>
               </div>
             </div>
           </div>
